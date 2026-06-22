@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Project {
+  id                  String   @id @default(cuid())
+  brandName           String
+  domain              String
+  productCategory     String
+  shortDescription    String   @default("")
+  targetAudience      String   @default("")
+  primaryUseCases     String   @default("")
+  region              String   @default("")
+  language            String   @default("en")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  competitors   Competitor[]
+  prompts       Prompt[]
+  scans         Scan[]
+  metricSnapshots MetricSnapshot[]
+  geoAudits     GeoAudit[]
+  contentBriefs ContentBrief[]
+}
+
+model Competitor {
+  id        String @id @default(cuid())
+  projectId String
+  name      String
+  domain    String @default("")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Prompt {
+  id          String   @id @default(cuid())
+  projectId   String
+  text        String
+  funnelStage String   @default("")
+  persona     String   @default("")
+  intent      String   @default("")
+  tags        String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project    Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  aiResponses AIResponse[]
+}
+
+model Scan {
+  id          String    @id @default(cuid())
+  projectId   String
+  status      String    @default("pending")
+  scanMode    String    @default("quick")
+  modelsJson  String    @default("[]")
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  project        Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  aiResponses    AIResponse[]
+  metricSnapshots MetricSnapshot[]
+}
+
+model AIResponse {
+  id                String   @id @default(cuid())
+  scanId            String
+  promptId          String
+  model             String
+  responseText      String   @default("")
+  responseSummary   String   @default("")
+  targetMentioned   Boolean  @default(false)
+  targetRecommended Boolean  @default(false)
+  targetRank        Int      @default(0)
+  sentiment         String   @default("neutral")
+  confidence        Float    @default(0)
+  createdAt         DateTime @default(now())
+
+  scan             Scan              @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  prompt           Prompt            @relation(fields: [promptId], references: [id], onDelete: Cascade)
+  detectedMentions DetectedMention[]
+  citations        Citation[]
+}
+
+model DetectedMention {
+  id           String @id @default(cuid())
+  aiResponseId String
+  name         String
+  type         String @default("target")
+  count        Int    @default(1)
+  rankPosition Int    @default(0)
+
+  aiResponse AIResponse @relation(fields: [aiResponseId], references: [id], onDelete: Cascade)
+}
+
+model Citation {
+  id                String  @id @default(cuid())
+  aiResponseId      String
+  url               String
+  domain            String
+  sourceType        String  @default("unknown")
+  isTargetDomain    Boolean @default(false)
+  isCompetitorDomain Boolean @default(false)
+  qualityScore      Float   @default(0)
+
+  aiResponse AIResponse @relation(fields: [aiResponseId], references: [id], onDelete: Cascade)
+}
+
+model MetricSnapshot {
+  id                  String   @id @default(cuid())
+  projectId           String
+  scanId              String
+  visibilityScore     Float    @default(0)
+  aiMentionRate       Float    @default(0)
+  promptCoverage      Float    @default(0)
+  citationScore       Float    @default(0)
+  competitorDominance Float    @default(0)
+  createdAt           DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  scan    Scan    @relation(fields: [scanId], references: [id], onDelete: Cascade)
+}
+
+model GeoAudit {
+  id                 String   @id @default(cuid())
+  projectId          String
+  url                String   @default("")
+  overallScore       Float    @default(0)
+  crawlabilityScore  Float    @default(0)
+  technicalScore     Float    @default(0)
+  contentDepthScore  Float    @default(0)
+  entityClarityScore Float    @default(0)
+  citationReadinessScore Float @default(0)
+  findingsJson       String   @default("[]")
+  createdAt          DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ContentBrief {
+  id                 String   @id @default(cuid())
+  projectId          String
+  title              String
+  targetPromptCluster String  @default("")
+  persona            String   @default("")
+  objective          String   @default("")
+  outlineJson        String   @default("[]")
+  entitiesJson       String   @default("[]")
+  questionsJson      String   @default("[]")
+  schemaType         String   @default("")
+  metricImproved     String   @default("")
+  status             String   @default("draft")
+  createdAt          DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
