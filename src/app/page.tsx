@@ -20,7 +20,6 @@ import {
   AlertTriangle,
   TrendingUp,
   Layers,
-  Globe,
 } from "lucide-react";
 import {
   motion,
@@ -324,7 +323,7 @@ function Header() {
       transition={{ duration: 0.6, ease }}
       className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl"
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-10">
         <a href="/" className="flex items-center gap-2.5">
           <motion.div
             whileHover={{ rotate: -10, scale: 1.05 }}
@@ -440,7 +439,7 @@ function Hero() {
         />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="mx-auto max-w-7xl px-4 pt-[12rem] sm:px-6 lg:px-8 sm:pt-[14rem]">
+      <motion.div style={{ opacity }} className="mx-auto max-w-7xl px-6 pt-[12rem] sm:px-8 lg:px-10 sm:pt-[14rem]">
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -547,8 +546,8 @@ function Hero() {
 
 function Problem() {
   return (
-    <Section id="problem" className="border-t border-border/50 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <Section id="problem" className="border-t border-border/50 py-28 sm:py-36">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -559,7 +558,7 @@ function Problem() {
           <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
             The B2B SaaS Visibility Crisis
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-lg text-muted">
+          <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
             Enterprise buyers have stopped reading ten blue links. They ask
             ChatGPT. They ask Gemini. Your brand is being evaluated in every
             response — and you are flying blind.
@@ -570,7 +569,7 @@ function Problem() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={stagger}
-          className="mt-16 grid gap-6 sm:grid-cols-3"
+          className="mt-20 grid gap-8 sm:grid-cols-3"
         >
           {problems.map(({ icon: Icon, title, desc }, i) => (
             <motion.div
@@ -580,12 +579,12 @@ function Problem() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease, delay: i * 0.1 } },
               }}
               whileHover={{ y: -6 }}
-              className="group rounded-2xl border border-border/50 bg-card p-6 transition-all hover:border-danger/20 hover:bg-card-hover hover:shadow-xl"
+              className="group rounded-2xl border border-border/50 bg-card p-8 transition-all hover:border-danger/20 hover:bg-card-hover hover:shadow-xl"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-danger/10">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-danger/10">
                 <Icon className="h-6 w-6 text-danger" />
               </div>
-              <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+              <h3 className="mb-3 text-lg font-semibold">{title}</h3>
               <p className="text-sm leading-relaxed text-muted">{desc}</p>
             </motion.div>
           ))}
@@ -601,8 +600,8 @@ function Problem() {
 
 function Features() {
   return (
-    <Section id="features" className="border-t border-border/50 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <Section id="features" className="border-t border-border/50 py-28 sm:py-36">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -613,7 +612,7 @@ function Features() {
           <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
             The AI visibility platform for B2B SaaS
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-lg text-muted">
+          <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
             Three programmatic pillars power every insight: synthetic persona
             prompt tracking, multi-model share-of-voice measurement, and
             high-information content optimization.
@@ -624,15 +623,15 @@ function Features() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={stagger}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
           {features.map(({ icon: Icon, title, desc }) => (
             <Card key={title}>
-              <div className="p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-transform group-hover:scale-110">
+              <div className="p-8">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-transform group-hover:scale-110">
                   <Icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+                <h3 className="mb-3 text-lg font-semibold">{title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{desc}</p>
               </div>
             </Card>
@@ -649,8 +648,8 @@ function Features() {
 
 function Metrics() {
   return (
-    <Section id="metrics" className="border-t border-border/50 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <Section id="metrics" className="border-t border-border/50 py-28 sm:py-36">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -661,7 +660,7 @@ function Metrics() {
           <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
             Four metrics that define a new category
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-lg text-muted">
+          <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
             SEO had keyword rankings. GEO has AI Mention Rate, Prompt Coverage,
             Citation Score, and Competitor Dominance. These four indicators
             replace everything you knew about search performance.
@@ -672,7 +671,7 @@ function Metrics() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={stagger}
-          className="mt-16 grid gap-6 sm:grid-cols-2"
+          className="mt-20 grid gap-8 sm:grid-cols-2"
         >
           {metrics.map((metric, i) => {
             const IconComponent = metric.icon;
@@ -725,8 +724,8 @@ function Metrics() {
 
 function Pricing() {
   return (
-    <Section id="pricing" className="border-t border-border/50 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <Section id="pricing" className="border-t border-border/50 py-28 sm:py-36">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -737,7 +736,7 @@ function Pricing() {
           <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
             Simple, transparent pricing
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-lg text-muted">
+          <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
             Start with a free AI Visibility Report. Upgrade when you need deeper
             tracking and optimization.
           </motion.p>
@@ -747,7 +746,7 @@ function Pricing() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={stagger}
-          className="mt-16 grid gap-6 lg:grid-cols-3 lg:gap-8"
+          className="mt-20 grid gap-8 lg:grid-cols-3 lg:gap-8"
         >
           {tiers.map((tier) => (
             <motion.div
@@ -757,7 +756,7 @@ function Pricing() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
               }}
               whileHover={{ y: -8 }}
-              className={`relative flex flex-col rounded-2xl border p-8 transition-all ${
+              className={`relative flex flex-col rounded-2xl border p-10 transition-all ${
                 tier.popular
                   ? "border-primary/50 bg-card shadow-2xl shadow-primary/10"
                   : "border-border/50 bg-card hover:border-primary/20 hover:shadow-xl"
@@ -827,8 +826,8 @@ function Pricing() {
 
 function Disclaimer() {
   return (
-    <div className="border-t border-border/30 bg-card/30 py-4">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="border-t border-border/30 bg-card/30 py-6">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <p className="text-center text-xs text-muted">
           This prototype uses a mix of real API calls (OpenAI) and simulated
           model data. Real Claude, Gemini, Perplexity, Google AI Overviews, and
@@ -843,14 +842,16 @@ const footerLinks = [
   { label: "Features", href: "#features" },
   { label: "Metrics", href: "#metrics" },
   { label: "Pricing", href: "#pricing" },
+  { label: "About", href: "#" },
+  { label: "Contact", href: "#" },
   { label: "Privacy", href: "#" },
 ];
 
 function Footer() {
   return (
-    <footer className="border-t border-border/30 py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+    <footer className="border-t border-border/30 py-16">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
           <div className="flex items-center gap-2.5">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/15">
               <span className="text-xs font-bold text-primary">L</span>
@@ -859,7 +860,7 @@ function Footer() {
               LLMRank <span className="text-primary">AI</span>
             </span>
           </div>
-          <nav className="flex items-center gap-6">
+          <nav className="flex flex-wrap items-center justify-center gap-6">
             {footerLinks.map((link) => (
               <a
                 key={link.label}

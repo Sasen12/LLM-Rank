@@ -8,8 +8,6 @@ import {
   ScanSearch,
   FileBarChart,
   Settings,
-  ChevronDown,
-  Search,
   TrendingUp,
   Link,
   FileSearch,
@@ -17,16 +15,13 @@ import {
   Brain,
   Sparkles,
   Bot,
-  Orbit,
   AlertTriangle,
   CheckCircle,
   XCircle,
-  Clock,
   Play,
   Plus,
   Edit3,
   Trash2,
-  ChevronRight,
   BarChart3,
   RefreshCw,
   Download,
@@ -34,7 +29,6 @@ import {
   Printer,
   ExternalLink,
   Menu,
-  X,
   Filter,
   Target,
   Globe,
@@ -243,6 +237,19 @@ const TABS = [
 
 const CHART_COLORS = ['#059669', '#14b8a6', '#0d9488', '#f59e0b', '#ef4444', '#8b5cf6', '#f97316']
 
+const chartGrid = { strokeDasharray: '3 3', stroke: 'var(--color-border)' } as const
+const chartAxis = { fill: 'var(--color-muted)', fontSize: 12 }
+const chartAxisStroke = 'var(--color-muted)'
+const chartAxisLine = { stroke: 'var(--color-border)' }
+const chartTooltip = {
+  contentStyle: {
+    background: 'var(--color-card)',
+    border: '1px solid var(--color-border)',
+    borderRadius: '12px',
+    color: 'var(--color-foreground)',
+  } as React.CSSProperties,
+}
+
 const STAGE_BADGE: Record<string, string> = {
   awareness: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
   consideration: 'bg-teal-500/15 text-teal-400 border-teal-500/25',
@@ -425,6 +432,7 @@ function MobileHeader({
       <button
         onClick={onMenuClick}
         className="flex items-center text-muted hover:text-foreground"
+        aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -930,7 +938,7 @@ function ScanHistoryTable({ project }: { project: Project }) {
                 const models: string[] = JSON.parse(scan.modelsJson || '[]')
                 const responseCount = scan.aiResponses?.length || 0
                 return (
-                  <motion.tr key={scan.id} className="border-b border-border/50 last:border-0" whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}>
+                  <motion.tr key={scan.id} className="border-b border-border/50 last:border-0 transition-colors hover:bg-card-hover/30">
                     <td className="px-5 py-3 text-foreground">
                       {formatDate(scan.createdAt)}
                     </td>
@@ -1170,7 +1178,7 @@ function PromptsTab({
                     type="checkbox"
                     checked={selectedIds.size === prompts.length && prompts.length > 0}
                     onChange={toggleAll}
-                    className="rounded border-border bg-card text-primary focus:ring-primary"
+                    className="rounded border-border bg-card text-primary focus-visible:ring-2 focus-visible:ring-primary"
                   />
                 </th>
                 <th className="px-4 py-3 font-medium">Prompt</th>
@@ -1191,15 +1199,14 @@ function PromptsTab({
                 return (
                   <motion.tr
                     key={prompt.id}
-                    className="border-b border-border/50 last:border-0"
-                    whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
+                    className="border-b border-border/50 last:border-0 transition-colors hover:bg-card-hover/30"
                   >
                     <td className="px-4 py-3">
                       <input
                         type="checkbox"
                         checked={selectedIds.has(prompt.id)}
                         onChange={() => toggleSelect(prompt.id)}
-                        className="rounded border-border bg-card text-primary focus:ring-primary"
+                        className="rounded border-border bg-card text-primary focus-visible:ring-2 focus-visible:ring-primary"
                       />
                     </td>
                     <td className="max-w-xs truncate px-4 py-3 text-foreground">
@@ -1240,13 +1247,13 @@ function PromptsTab({
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1">
-                        <button className="rounded-lg p-1.5 text-muted transition-colors hover:bg-card-hover hover:text-foreground">
+                        <button className="rounded-lg p-1.5 text-muted transition-colors hover:bg-card-hover hover:text-foreground" aria-label="Edit prompt">
                           <Edit3 className="h-4 w-4" />
                         </button>
-                        <button className="rounded-lg p-1.5 text-muted transition-colors hover:bg-card-hover hover:text-danger">
+                        <button className="rounded-lg p-1.5 text-muted transition-colors hover:bg-card-hover hover:text-danger" aria-label="Delete prompt">
                           <Trash2 className="h-4 w-4" />
                         </button>
-                        <button className="rounded-lg p-1.5 text-muted transition-colors hover:bg-card-hover hover:text-primary">
+                        <button className="rounded-lg p-1.5 text-muted transition-colors hover:bg-card-hover hover:text-primary" aria-label="Run prompt">
                           <Play className="h-4 w-4" />
                         </button>
                       </div>
@@ -1290,7 +1297,7 @@ function AIResponsesTab({ project }: { project: Project }) {
           <select
             value={filterModel}
             onChange={(e) => setFilterModel(e.target.value)}
-            className="rounded-xl border border-border bg-card px-4 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
+            className="rounded-xl border border-border bg-card px-4 py-2 text-sm text-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <option value="all">All Models</option>
             {models.map((m) => (
@@ -1507,26 +1514,19 @@ function CompetitorsTab({ project }: { project: Project }) {
                     layout="vertical"
                     margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                    <CartesianGrid {...chartGrid} />
                     <XAxis
                       type="number"
-                      stroke="#64748b"
-                      tick={{ fill: '#64748b', fontSize: 12 }}
+                      stroke={chartAxisStroke}
+                      tick={chartAxis}
                     />
                     <YAxis
                       type="category"
                       dataKey="name"
-                      stroke="#64748b"
-                      tick={{ fill: '#64748b', fontSize: 12 }}
+                      stroke={chartAxisStroke}
+                      tick={chartAxis}
                     />
-                    <Tooltip
-                      contentStyle={{
-                        background: '#111827',
-                        border: '1px solid #1e293b',
-                        borderRadius: '12px',
-                        color: '#e2e8f0',
-                      }}
-                    />
+                    <Tooltip {...chartTooltip} />
                     <Bar dataKey="mentionPct" radius={[0, 6, 6, 0]}>
                       {competitorMentionData.map((_, i) => (
                         <Cell
@@ -1563,8 +1563,7 @@ function CompetitorsTab({ project }: { project: Project }) {
                 {competitorMentionData.map((c, i) => (
                   <motion.tr
                     key={c.name}
-                    className="border-b border-border/50 last:border-0"
-                    whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
+                    className="border-b border-border/50 last:border-0 transition-colors hover:bg-card-hover/30"
                   >
                     <td className="px-5 py-3 font-medium text-foreground">
                       {c.name}
@@ -1780,27 +1779,17 @@ function CitationsTab({ project }: { project: Project }) {
                         data={sourceData}
                         margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
                       >
-                        <CartesianGrid
-                          strokeDasharray="3 3"
-                          stroke="#1e293b"
-                        />
+                        <CartesianGrid {...chartGrid} />
                         <XAxis
                           dataKey="name"
-                          stroke="#64748b"
-                          tick={{ fill: '#64748b', fontSize: 12 }}
+                          stroke={chartAxisStroke}
+                          tick={chartAxis}
                         />
                         <YAxis
-                          stroke="#64748b"
-                          tick={{ fill: '#64748b', fontSize: 12 }}
+                          stroke={chartAxisStroke}
+                          tick={chartAxis}
                         />
-                        <Tooltip
-                          contentStyle={{
-                            background: '#111827',
-                            border: '1px solid #1e293b',
-                            borderRadius: '12px',
-                            color: '#e2e8f0',
-                          }}
-                        />
+                        <Tooltip {...chartTooltip} />
                         <Bar dataKey="count" radius={[6, 6, 0, 0]}>
                           {sourceData.map((_, i) => (
                             <Cell
@@ -1886,8 +1875,7 @@ function CitationsTab({ project }: { project: Project }) {
                 {allCitations.slice(0, 50).map((c) => (
                   <motion.tr
                     key={c.id}
-                    className="border-b border-border/50 last:border-0"
-                    whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
+                    className="border-b border-border/50 last:border-0 transition-colors hover:bg-card-hover/30"
                   >
                     <td className="max-w-xs truncate px-5 py-3 text-foreground">
                       <a
@@ -2096,8 +2084,7 @@ function GEOAuditTab({
               {findings.map((f, i) => (
                 <motion.tr
                   key={i}
-                  className="border-b border-border/50 last:border-0"
-                  whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
+                  className="border-b border-border/50 last:border-0 transition-colors hover:bg-card-hover/30"
                 >
                   <td className="px-5 py-3 text-foreground">{f.issue}</td>
                   <td className="px-5 py-3">

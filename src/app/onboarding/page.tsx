@@ -165,7 +165,7 @@ export default function OnboardingPage() {
         </motion.div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-[#1e293b] rounded-full h-1.5 mb-6">
+        <div className="w-full bg-card rounded-full h-1.5 mb-6">
           <motion.div
             className="bg-primary h-1.5 rounded-full"
             initial={{ width: 0 }}
@@ -185,7 +185,7 @@ export default function OnboardingPage() {
                       ? 'bg-primary text-white'
                       : s === step
                         ? 'bg-primary text-white ring-2 ring-primary/30'
-                        : 'bg-[#1e293b] text-muted'
+                        : 'bg-card text-muted'
                   }`}
                   animate={s === step ? { scale: 1.12 } : { scale: 1 }}
                   transition={{ duration: 0.3, ease }}
@@ -203,7 +203,7 @@ export default function OnboardingPage() {
               {s < totalSteps && (
                 <div
                   className={`w-10 h-0.5 ${
-                    s < step ? 'bg-primary' : 'bg-[#1e293b]'
+                    s < step ? 'bg-primary' : 'bg-card'
                   }`}
                 />
               )}
@@ -230,7 +230,7 @@ export default function OnboardingPage() {
               >
                 <div className="space-y-5">
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                    <label className="text-sm font-medium text-muted mb-1.5 block">
                       What is your brand name?
                     </label>
                     <input
@@ -238,12 +238,12 @@ export default function OnboardingPage() {
                       value={form.brandName}
                       onChange={(e) => updateField('brandName', e.target.value)}
                       placeholder="e.g., NorthStar CRM"
-                      className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                    <label className="text-sm font-medium text-muted mb-1.5 block">
                       What is your website domain?
                     </label>
                     <input
@@ -251,12 +251,12 @@ export default function OnboardingPage() {
                       value={form.domain}
                       onChange={(e) => updateField('domain', e.target.value)}
                       placeholder="e.g., northstarcrm.example"
-                      className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                    <label className="text-sm font-medium text-muted mb-1.5 block">
                       Product category
                     </label>
                     <input
@@ -264,12 +264,12 @@ export default function OnboardingPage() {
                       value={form.productCategory}
                       onChange={(e) => updateField('productCategory', e.target.value)}
                       placeholder="e.g., CRM for B2B SaaS sales teams"
-                      className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                    <label className="text-sm font-medium text-muted mb-1.5 block">
                       Short description of your product
                     </label>
                     <textarea
@@ -277,7 +277,7 @@ export default function OnboardingPage() {
                       onChange={(e) => updateField('shortDescription', e.target.value)}
                       placeholder="Describe what your product does..."
                       rows={3}
-                      className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary resize-none"
                     />
                   </div>
                 </div>
@@ -295,7 +295,7 @@ export default function OnboardingPage() {
               >
                 <div className="space-y-5">
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                    <label className="text-sm font-medium text-muted mb-1.5 block">
                       Target audience
                     </label>
                     <input
@@ -303,12 +303,12 @@ export default function OnboardingPage() {
                       value={form.targetAudience}
                       onChange={(e) => updateField('targetAudience', e.target.value)}
                       placeholder="e.g., Seed to Series B SaaS companies"
-                      className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                    <label className="text-sm font-medium text-muted mb-1.5 block">
                       Primary use cases
                     </label>
                     <textarea
@@ -316,20 +316,20 @@ export default function OnboardingPage() {
                       onChange={(e) => updateField('primaryUseCases', e.target.value)}
                       placeholder="e.g., Lead generation&#10;Sales prospecting&#10;Market research"
                       rows={4}
-                      className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                      className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary resize-none"
                     />
                     <p className="text-xs text-muted mt-1">One per line</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                      <label className="text-sm font-medium text-muted mb-1.5 block">
                         Region
                       </label>
                       <select
                         value={form.region}
                         onChange={(e) => updateField('region', e.target.value)}
-                        className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary appearance-none"
+                        className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary appearance-none"
                       >
                         {REGIONS.map((r) => (
                           <option key={r} value={r}>{r}</option>
@@ -338,13 +338,13 @@ export default function OnboardingPage() {
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium text-[#94a3b8] mb-1.5 block">
+                      <label className="text-sm font-medium text-muted mb-1.5 block">
                         Language
                       </label>
                       <select
                         value={form.language}
                         onChange={(e) => updateField('language', e.target.value)}
-                        className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary appearance-none"
+                        className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary appearance-none"
                       >
                         {LANGUAGES.map((l) => (
                           <option key={l} value={l}>{l}</option>
@@ -380,14 +380,14 @@ export default function OnboardingPage() {
                           value={comp.name}
                           onChange={(e) => updateCompetitor(i, 'name', e.target.value)}
                           placeholder="Competitor name"
-                          className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary"
+                          className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         />
                         <input
                           type="text"
                           value={comp.domain}
                           onChange={(e) => updateCompetitor(i, 'domain', e.target.value)}
                           placeholder="Domain (optional)"
-                          className="w-full bg-[#1e293b] border border-[#334155] rounded-lg px-4 py-3 text-white placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary"
+                          className="w-full bg-card border border-border rounded-lg px-4 py-3 text-white placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         />
                       </div>
                       <motion.button
@@ -432,7 +432,7 @@ export default function OnboardingPage() {
               >
                 <div className="space-y-6">
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-3 block">
+                    <label className="text-sm font-medium text-muted mb-3 block">
                       AI Models to track
                     </label>
                     <div className="grid grid-cols-2 gap-3">
@@ -444,14 +444,14 @@ export default function OnboardingPage() {
                           className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
                             form.models.includes(model)
                               ? 'border-primary bg-primary/5'
-                              : 'border-[#334155] bg-[#1e293b] hover:border-muted'
+                              : 'border-border bg-card hover:border-muted'
                           }`}
                         >
                           <input
                             type="checkbox"
                             checked={form.models.includes(model)}
                             onChange={() => toggleModel(model)}
-                            className="w-4 h-4 rounded border-[#334155] bg-[#1e293b] text-primary focus:ring-primary"
+                            className="w-4 h-4 rounded border-border bg-card text-primary focus-visible:ring-2 focus-visible:ring-primary"
                           />
                           <span className="text-sm text-white">{model}</span>
                         </motion.label>
@@ -460,7 +460,7 @@ export default function OnboardingPage() {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-3 block">
+                    <label className="text-sm font-medium text-muted mb-3 block">
                       Prompts per model
                     </label>
                     <div className="flex gap-3">
@@ -472,7 +472,7 @@ export default function OnboardingPage() {
                           className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors ${
                             form.promptCount === count
                               ? 'border-primary bg-primary/5 text-white'
-                              : 'border-[#334155] bg-[#1e293b] text-muted hover:text-white hover:border-muted'
+                              : 'border-border bg-card text-muted hover:text-white hover:border-muted'
                           }`}
                         >
                           <input
@@ -489,7 +489,7 @@ export default function OnboardingPage() {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-[#94a3b8] mb-3 block">
+                    <label className="text-sm font-medium text-muted mb-3 block">
                       Scan mode
                     </label>
                     <div className="flex gap-3">
@@ -501,7 +501,7 @@ export default function OnboardingPage() {
                           className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-lg border cursor-pointer transition-colors ${
                             form.scanMode === mode
                               ? 'border-primary bg-primary/5 text-white'
-                              : 'border-[#334155] bg-[#1e293b] text-muted hover:text-white hover:border-muted'
+                              : 'border-border bg-card text-muted hover:text-white hover:border-muted'
                           }`}
                         >
                           <input
@@ -528,7 +528,7 @@ export default function OnboardingPage() {
               disabled={step === 1}
               whileHover={step !== 1 ? { scale: 1.02 } : undefined}
               whileTap={step !== 1 ? { scale: 0.97 } : undefined}
-              className="px-5 py-2.5 rounded-lg border border-[#334155] text-[#94a3b8] hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-sm font-medium"
+              className="px-5 py-2.5 rounded-lg border border-border text-muted hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-sm font-medium"
             >
               Back
             </motion.button>

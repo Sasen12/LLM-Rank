@@ -70,6 +70,21 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 }
 
+const chartGrid = { strokeDasharray: '3 3', stroke: 'var(--color-border)' } as const
+const chartAxis = { fill: 'var(--color-muted)', fontSize: 11 }
+const chartAxisLine = { stroke: 'var(--color-border)' }
+const chartTooltip = {
+  contentStyle: {
+    background: 'var(--color-card)',
+    border: '1px solid var(--color-border)',
+    borderRadius: '8px',
+    color: 'var(--color-foreground)',
+    fontSize: '12px',
+  } as React.CSSProperties,
+  labelStyle: { color: 'var(--color-foreground)', fontWeight: 600 } as React.CSSProperties,
+}
+const chartLegend = { fontSize: '11px', color: 'var(--color-muted)' }
+
 type NavItem = {
   label: string
   icon: typeof LayoutDashboard
@@ -642,7 +657,7 @@ function DashboardContent({
       initial="hidden"
       animate="visible"
       variants={fadeUp}
-      className="p-4 sm:p-6 lg:p-8"
+      className="p-6 sm:p-8 lg:p-10"
     >
       <Header
         projects={projects}
@@ -708,7 +723,7 @@ function Header({
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="mt-1 text-sm text-muted">
@@ -765,7 +780,7 @@ function Header({
 function NoScanData() {
   const router = useRouter()
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-12 text-center">
+    <div className="flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-14 text-center">
       <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
         <ScanEye className="h-8 w-8 text-primary" />
       </div>
@@ -809,7 +824,7 @@ function MetricCardsGrid({
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
       }}
-      className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+      className="mb-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
     >
       {cards.map((card) => (
         <motion.div
@@ -820,7 +835,7 @@ function MetricCardsGrid({
           }}
           whileHover={{ y: -4 }}
           transition={{ type: 'spring', stiffness: 300 }}
-          className="rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/20"
+          className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/20"
         >
           <div className="mb-3 flex items-center justify-between">
             <span className="text-xs font-medium uppercase tracking-wider text-muted">
@@ -902,43 +917,32 @@ function ChartsRow({
   const hasBar = barChartData.length > 0
 
   return (
-    <div className="mb-8 grid gap-6 lg:grid-cols-2">
+    <div className="mb-10 grid gap-6 lg:grid-cols-2">
       {/* Line Chart */}
-      <div className="rounded-xl border border-border bg-card p-5">
+      <div className="rounded-xl border border-border bg-card p-6">
         <h3 className="mb-1 text-base font-semibold">AI Visibility Trend</h3>
         <p className="mb-5 text-xs text-muted">
           Visibility score over the last {trendData.length} scan
           {trendData.length !== 1 ? 's' : ''}
         </p>
         {hasTrend ? (
-          <ResponsiveContainer width="100%" height={260}>
+          <ResponsiveContainer width="100%" height={280}>
             <LineChart data={trendData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+              <CartesianGrid {...chartGrid} />
               <XAxis
                 dataKey="date"
-                tick={{ fill: '#64748b', fontSize: 11 }}
-                axisLine={{ stroke: '#1e293b' }}
+                tick={chartAxis}
+                axisLine={chartAxisLine}
                 tickLine={false}
               />
               <YAxis
                 domain={[0, 100]}
-                tick={{ fill: '#64748b', fontSize: 11 }}
-                axisLine={{ stroke: '#1e293b' }}
+                tick={chartAxis}
+                axisLine={chartAxisLine}
                 tickLine={false}
               />
-              <Tooltip
-                contentStyle={{
-                  background: '#111827',
-                  border: '1px solid #1e293b',
-                  borderRadius: '8px',
-                  color: '#e2e8f0',
-                  fontSize: '12px',
-                }}
-                labelStyle={{ color: '#e2e8f0', fontWeight: 600 }}
-              />
-              <Legend
-                wrapperStyle={{ fontSize: '11px', color: '#64748b' }}
-              />
+              <Tooltip {...chartTooltip} />
+              <Legend wrapperStyle={chartLegend} />
               <Line
                 type="monotone"
                 dataKey="score"
@@ -969,46 +973,35 @@ function ChartsRow({
             </LineChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex h-[260px] items-center justify-center text-sm text-muted">
+          <div className="flex h-[280px] items-center justify-center text-sm text-muted">
             No trend data available
           </div>
         )}
       </div>
 
       {/* Bar Chart */}
-      <div className="rounded-xl border border-border bg-card p-5">
+      <div className="rounded-xl border border-border bg-card p-6">
         <h3 className="mb-1 text-base font-semibold">Brand vs Competitors</h3>
         <p className="mb-5 text-xs text-muted">
           Total mentions detected in AI responses
         </p>
         {hasBar ? (
-          <ResponsiveContainer width="100%" height={260}>
+          <ResponsiveContainer width="100%" height={280}>
             <BarChart data={barChartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+              <CartesianGrid {...chartGrid} />
               <XAxis
                 dataKey="name"
-                tick={{ fill: '#64748b', fontSize: 10 }}
-                axisLine={{ stroke: '#1e293b' }}
+                tick={{ fill: 'var(--color-muted)', fontSize: 10 }}
+                axisLine={chartAxisLine}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: '#64748b', fontSize: 11 }}
-                axisLine={{ stroke: '#1e293b' }}
+                tick={chartAxis}
+                axisLine={chartAxisLine}
                 tickLine={false}
               />
-              <Tooltip
-                contentStyle={{
-                  background: '#111827',
-                  border: '1px solid #1e293b',
-                  borderRadius: '8px',
-                  color: '#e2e8f0',
-                  fontSize: '12px',
-                }}
-                labelStyle={{ color: '#e2e8f0', fontWeight: 600 }}
-              />
-              <Legend
-                wrapperStyle={{ fontSize: '11px', color: '#64748b' }}
-              />
+              <Tooltip {...chartTooltip} />
+              <Legend wrapperStyle={chartLegend} />
               <Bar
                 dataKey="mentions"
                 name="Mentions"
@@ -1022,7 +1015,7 @@ function ChartsRow({
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex h-[260px] items-center justify-center text-sm text-muted">
+          <div className="flex h-[280px] items-center justify-center text-sm text-muted">
             No competitor data available
           </div>
         )}
@@ -1046,9 +1039,9 @@ function ModelPerformanceGrid({
   }[]
 }) {
   return (
-    <div className="mb-8">
-      <h3 className="mb-4 text-base font-semibold">Model Performance</h3>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+    <div className="mb-10">
+      <h3 className="mb-6 text-base font-semibold">Model Performance</h3>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {models.map((model) => {
           const IconComponent = MODEL_ICONS[model.name] || Brain
           const sentimentDotColor =
@@ -1148,7 +1141,7 @@ function RecentScansTable({
 
   if (scans.length === 0) {
     return (
-      <div className="mb-8">
+      <div className="mb-10">
         <h3 className="mb-4 text-base font-semibold">Recent Scans</h3>
         <div className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-8 text-center">
           <ScanEye className="mb-3 h-8 w-8 text-muted" />
@@ -1159,28 +1152,28 @@ function RecentScansTable({
   }
 
   return (
-    <div className="mb-8">
-      <h3 className="mb-4 text-base font-semibold">Recent Scans</h3>
+    <div className="mb-10">
+      <h3 className="mb-6 text-base font-semibold">Recent Scans</h3>
       <div className="overflow-x-auto rounded-xl border border-border">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border bg-card-hover/50">
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-muted">
                 Date
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-muted">
                 Models
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-muted">
                 Prompts
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-muted">
                 Status
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted">
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider text-muted">
                 Mention Rate
               </th>
-              <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-muted">
+              <th className="px-6 py-4 text-right text-xs font-medium uppercase tracking-wider text-muted">
                 Actions
               </th>
             </tr>
@@ -1191,16 +1184,16 @@ function RecentScansTable({
                 key={scan.id}
                 className="transition-colors hover:bg-card-hover/50"
               >
-                <td className="whitespace-nowrap px-4 py-3 text-sm">
+                <td className="whitespace-nowrap px-6 py-4 text-sm">
                   {formatDate(scan.date)}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm">
+                <td className="whitespace-nowrap px-6 py-4 text-sm">
                   {scan.modelCount}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm">
+                <td className="whitespace-nowrap px-6 py-4 text-sm">
                   {scan.promptCount}
                 </td>
-                <td className="whitespace-nowrap px-4 py-3">
+                <td className="whitespace-nowrap px-6 py-4">
                   <span
                     className={cn([
                       'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize',
@@ -1210,10 +1203,10 @@ function RecentScansTable({
                     {scan.status}
                   </span>
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm font-medium">
+                <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">
                   {scan.mentionRate}%
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 text-right">
+                <td className="whitespace-nowrap px-6 py-4 text-right">
                   <button
                     onClick={() => router.push(`/projects/${projectId}`)}
                     className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-card-hover hover:text-foreground"
@@ -1241,13 +1234,13 @@ function RecommendationsSection({
   }[]
 }) {
   return (
-    <div className="mb-8">
-      <h3 className="mb-4 text-base font-semibold">Top Recommendations</h3>
+    <div className="mb-10">
+      <h3 className="mb-6 text-base font-semibold">Top Recommendations</h3>
       <div className="space-y-3">
         {items.map((item, i) => (
           <div
             key={i}
-            className="flex items-start gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/20"
+            className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/20"
           >
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
               <item.icon className="h-5 w-5 text-primary" />
