@@ -10,9 +10,11 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "db:push": "prisma db push",
+    "db:push": "prisma db push --schema=prisma/schema.local.prisma",
+    "db:generate": "prisma generate --schema=prisma/schema.local.prisma",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma db push --force-reset && tsx prisma/seed.ts"
+    "db:reset": "prisma db push --schema=prisma/schema.local.prisma --force-reset && tsx prisma/seed.ts",
+    "db:setup": "prisma generate --schema=prisma/schema.local.prisma && prisma db push --schema=prisma/schema.local.prisma"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",

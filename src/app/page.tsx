@@ -92,7 +92,7 @@ function Card({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.7, ease, delay }}
       whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-      className={`rounded-2xl border border-border bg-card transition-colors ${className}`}
+      className={`rounded-2xl border border-border/40 bg-card transition-colors hover:border-primary/10 ${className}`}
     >
       {children}
     </motion.div>
@@ -167,8 +167,8 @@ const metrics = [
     formula: "brand mentions across 1,000 standardized prompts / total responses × 100",
     good: ">60% is strong",
     desc: "The percentage of test queries where your brand is recommended across standardized categorical prompts. Measures general brand awareness within LLM weights.",
-    color: "from-primary/15 to-primary/5",
-    border: "border-primary/20",
+    color: "from-primary/10 to-primary/[0.03]",
+    border: "border-primary/10",
     icon: Brain,
   },
   {
@@ -176,8 +176,8 @@ const metrics = [
     formula: "unique prompts with brand mention / total prompts × 100",
     good: ">50% means good coverage",
     desc: "The breadth of semantic variations — transactional, educational, and conversational — that your brand successfully answers. Ensures visibility at every phase of the B2B buyer's research funnel.",
-    color: "from-accent/15 to-accent/5",
-    border: "border-accent/20",
+    color: "from-primary/10 to-primary/[0.03]",
+    border: "border-primary/10",
     icon: TargetIcon,
   },
   {
@@ -185,8 +185,8 @@ const metrics = [
     formula: "your domain citations / total citations across search-centric models × 100",
     good: "Higher = more referral traffic from AI",
     desc: "The frequency with which search-centric models like Perplexity and Gemini append direct anchor links to your domain. Directly correlates to downstream referral traffic from AI engines.",
-    color: "from-secondary/15 to-secondary/5",
-    border: "border-secondary/20",
+    color: "from-primary/10 to-primary/[0.03]",
+    border: "border-primary/10",
     icon: Link2Icon,
   },
   {
@@ -194,8 +194,8 @@ const metrics = [
     formula: "competitor mentions / total brand mentions across shared prompt landscapes × 100",
     good: "Lower is better — identifies vulnerability",
     desc: "A relative index tracking competitor share-of-voice within shared prompt landscapes. Identifies gaps where competitors win organic recommendations that should be yours.",
-    color: "from-danger/15 to-danger/5",
-    border: "border-danger/20",
+    color: "from-primary/10 to-primary/[0.03]",
+    border: "border-primary/10",
     icon: CrosshairIcon,
   },
 ];
@@ -321,13 +321,13 @@ function Header() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/20 bg-background/70 backdrop-blur-2xl"
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-10">
         <a href="/" className="flex items-center gap-2.5">
           <motion.div
             whileHover={{ rotate: -10, scale: 1.05 }}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 shadow-sm shadow-primary/10"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10"
           >
             <span className="text-sm font-bold text-primary">L</span>
           </motion.div>
@@ -349,7 +349,7 @@ function Header() {
         <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="hidden md:block">
           <a
             href="/onboarding"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-dark hover:shadow-primary/30"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-primary/30 bg-primary/10 px-5 py-2.5 text-sm font-semibold text-primary backdrop-blur-sm transition-all hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20"
           >
             Run Free AI Visibility Report
             <ArrowUpRight className="h-4 w-4" />
@@ -385,7 +385,7 @@ function MobileMenu() {
           ))}
           <a
             href="/onboarding"
-            className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-primary-dark"
+            className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl border border-primary/30 bg-primary/10 px-5 py-3 text-sm font-semibold text-primary backdrop-blur-sm transition-all hover:bg-primary hover:text-white"
           >
             Run Free AI Visibility Report
             <ArrowUpRight className="h-4 w-4" />
@@ -410,9 +410,9 @@ function Hero() {
     <section ref={ref} className="relative min-h-screen overflow-hidden">
       {/* Parallax background glow */}
       <motion.div style={{ y: bgY }} className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/8 blur-[120px]" />
-        <div className="absolute top-1/3 right-1/4 h-[30rem] w-[30rem] translate-x-1/2 rounded-full bg-secondary/8 blur-[120px]" />
-        <div className="absolute bottom-1/3 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-accent/8 blur-[120px]" />
+        <div className="absolute top-1/4 left-1/4 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute top-1/3 right-1/4 h-[30rem] w-[30rem] translate-x-1/2 rounded-full bg-primary/[0.04] blur-[120px]" />
+        <div className="absolute bottom-1/3 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-primary/[0.03] blur-[120px]" />
       </motion.div>
 
       {/* Floating decorative shapes */}
@@ -425,17 +425,17 @@ function Hero() {
         <motion.div
           animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[15%] right-[10%] h-16 w-16 rounded-2xl border border-primary/20 bg-primary/5"
+          className="absolute top-[15%] right-[10%] h-16 w-16 rounded-2xl border border-primary/10 bg-primary/[0.03]"
         />
         <motion.div
           animate={{ y: [0, 25, 0], rotate: [0, -5, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-[40%] left-[5%] h-12 w-12 rounded-full border border-accent/20 bg-accent/5"
+          className="absolute top-[40%] left-[5%] h-12 w-12 rounded-full border border-white/5 bg-white/[0.02]"
         />
         <motion.div
           animate={{ y: [0, -15, 0], rotate: [0, 8, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-[30%] right-[15%] h-10 w-10 rounded-xl border border-secondary/20 bg-secondary/5"
+          className="absolute bottom-[30%] right-[15%] h-10 w-10 rounded-xl border border-primary/10 bg-primary/[0.03]"
         />
       </motion.div>
 
@@ -445,7 +445,7 @@ function Hero() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, ease }}
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.04] px-4 py-1.5 text-sm font-medium text-primary-light"
           >
             <motion.div
               animate={{ scale: [1, 1.2, 1] }}
@@ -460,10 +460,10 @@ function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.15 }}
-            className="text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+            className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
           >
             Rank where buyers now search:{" "}
-            <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
               ChatGPT, Gemini, Claude, and Perplexity
             </span>
           </motion.h1>
@@ -472,7 +472,7 @@ function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.3 }}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl"
+            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl"
           >
             SEO is broken. AI doesn't read keyword-stuffed blog posts — it
             synthesizes structured, high-information content from brands it can
@@ -488,21 +488,21 @@ function Hero() {
           >
             <motion.a
               href="/onboarding"
-              whileHover={{ scale: 1.04 }}
+              whileHover={{ scale: 1.04, boxShadow: "0 0 30px rgba(99,102,241,0.3)" }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-dark hover:shadow-primary/40"
+              className="group inline-flex items-center gap-2 rounded-xl border border-primary bg-gradient-to-b from-primary to-primary-dark px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/20 transition-all hover:shadow-primary/30"
             >
               Run Free AI Visibility Report
-              <ArrowUpRight className="h-5 w-5" />
+              <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </motion.a>
             <motion.a
               href="/dashboard"
-              whileHover={{ scale: 1.04 }}
+              whileHover={{ scale: 1.04, borderColor: "rgba(99,102,241,0.5)" }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-2 rounded-xl border border-border/60 bg-card/80 backdrop-blur-sm px-8 py-3.5 text-base font-semibold text-foreground transition-all hover:bg-card-hover"
+              className="group inline-flex items-center gap-2 rounded-xl border border-border/60 bg-card/50 px-8 py-3.5 text-base font-semibold text-foreground backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card/80"
             >
               View Demo Dashboard
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
             </motion.a>
           </motion.div>
         </div>
@@ -523,9 +523,9 @@ function Hero() {
                   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease } },
                 }}
                 whileHover={{ y: -8, scale: 1.05 }}
-                className="group flex flex-col items-center gap-3 rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm p-6 transition-all hover:border-primary/30 hover:bg-card/80 hover:shadow-xl hover:shadow-primary/5"
+                className="group flex flex-col items-center gap-3 rounded-2xl border border-border/40 bg-card/50 backdrop-blur-sm p-6 transition-all hover:border-primary/20 hover:bg-card/80 hover:shadow-xl hover:shadow-primary/[0.03]"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-secondary/10 transition-transform group-hover:scale-110">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/[0.03] transition-transform group-hover:scale-110">
                   <Icon className="h-7 w-7 text-primary" />
                 </div>
                 <span className="text-sm font-semibold text-foreground">
@@ -533,6 +533,109 @@ function Hero() {
                 </span>
               </motion.div>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Bento Grid — Dashboard Mockup */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease, delay: 0.8 }}
+          className="mx-auto mt-24 max-w-5xl"
+        >
+          <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-b from-white/[0.03] to-transparent p-1 shadow-2xl shadow-primary/[0.02]">
+            <div className="rounded-xl bg-[#070b14]/95 backdrop-blur-xl">
+              {/* Top bar */}
+              <div className="flex items-center gap-3 border-b border-white/[0.04] px-6 py-4">
+                <div className="flex gap-1.5">
+                  <div className="h-2.5 w-2.5 rounded-full bg-red-500/40" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/40" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-green-500/40" />
+                </div>
+                <div className="ml-4 h-5 w-48 rounded-md bg-white/[0.04]" />
+              </div>
+              {/* Grid content */}
+              <div className="grid grid-cols-12 gap-4 p-6">
+                {/* Sidebar */}
+                <div className="col-span-3 space-y-3">
+                  <div className="h-4 w-20 rounded bg-white/[0.04]" />
+                  <div className="space-y-2">
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="h-3 rounded bg-white/[0.03]"
+                        style={{ width: `${[65, 80, 55, 75, 60][i]}%` }}
+                      />
+                    ))}
+                  </div>
+                  <div className="mt-4 h-4 w-16 rounded bg-white/[0.04]" />
+                  <div className="space-y-2">
+                    {[...Array(3)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="h-3 rounded bg-white/[0.03]"
+                        style={{ width: `${[70, 50, 60][i]}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                {/* Main area */}
+                <div className="col-span-9 space-y-4">
+                  {/* Metric cards row */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} className="space-y-2 rounded-xl border border-white/[0.04] bg-white/[0.02] p-4">
+                        <div className="h-3 w-16 rounded bg-white/[0.04]" />
+                        <div className="h-6 w-20 rounded bg-white/[0.06]" />
+                        <div className="h-2 w-12 rounded bg-white/[0.03]" />
+                      </div>
+                    ))}
+                  </div>
+                  {/* Chart area */}
+                  <div className="rounded-xl border border-white/[0.04] bg-white/[0.01] p-5">
+                    <div className="mb-4 flex items-center justify-between">
+                      <div className="h-3 w-28 rounded bg-white/[0.04]" />
+                      <div className="flex gap-2">
+                        <div className="h-3 w-10 rounded bg-white/[0.03]" />
+                        <div className="h-3 w-10 rounded bg-white/[0.03]" />
+                      </div>
+                    </div>
+                    {/* Faux bar chart */}
+                    <div className="flex items-end gap-2 pt-4">
+                      {[40, 65, 45, 80, 55, 70, 60, 85, 50, 75, 65, 90].map((h, i) => (
+                        <div key={i} className="flex flex-1 items-end justify-center">
+                          <div
+                            className="w-full rounded-t-sm bg-gradient-to-t from-primary/20 to-primary/10 transition-all"
+                            style={{ height: `${h}%`, maxHeight: 160, minHeight: 16 }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    {/* X-axis line */}
+                    <div className="mt-2 h-px bg-white/[0.04]" />
+                  </div>
+                  {/* Bottom row */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-4">
+                      <div className="h-3 w-20 rounded bg-white/[0.04]" />
+                      <div className="mt-3 space-y-2">
+                        {[...Array(3)].map((_, i) => (
+                          <div key={i} className="h-2 rounded bg-white/[0.03]" style={{ width: `${[90, 75, 60][i]}%` }} />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-4">
+                      <div className="h-3 w-16 rounded bg-white/[0.04]" />
+                      <div className="mt-3 space-y-2">
+                        {[...Array(3)].map((_, i) => (
+                          <div key={i} className="h-2 rounded bg-white/[0.03]" style={{ width: `${[70, 85, 55][i]}%` }} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </motion.div>
@@ -546,7 +649,7 @@ function Hero() {
 
 function Problem() {
   return (
-    <Section id="problem" className="border-t border-border/50 py-28 sm:py-36">
+    <Section id="problem" className="border-t border-white/[0.04] py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
@@ -555,7 +658,7 @@ function Problem() {
           variants={stagger}
           className="mx-auto max-w-3xl text-center"
         >
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <motion.h2 variants={fadeUp} className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
             The B2B SaaS Visibility Crisis
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
@@ -579,10 +682,10 @@ function Problem() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease, delay: i * 0.1 } },
               }}
               whileHover={{ y: -6 }}
-              className="group rounded-2xl border border-border/50 bg-card p-8 transition-all hover:border-danger/20 hover:bg-card-hover hover:shadow-xl"
+              className="group rounded-2xl border border-border/40 bg-card p-8 transition-all hover:border-primary/15 hover:bg-card-hover hover:shadow-xl hover:shadow-primary/[0.02]"
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-danger/10">
-                <Icon className="h-6 w-6 text-danger" />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5">
+                <Icon className="h-6 w-6 text-primary-light" />
               </div>
               <h3 className="mb-3 text-lg font-semibold">{title}</h3>
               <p className="text-sm leading-relaxed text-muted">{desc}</p>
@@ -600,7 +703,7 @@ function Problem() {
 
 function Features() {
   return (
-    <Section id="features" className="border-t border-border/50 py-28 sm:py-36">
+    <Section id="features" className="border-t border-white/[0.04] py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
@@ -609,7 +712,7 @@ function Features() {
           variants={stagger}
           className="mx-auto max-w-3xl text-center"
         >
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <motion.h2 variants={fadeUp} className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
             The AI visibility platform for B2B SaaS
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
@@ -628,8 +731,8 @@ function Features() {
           {features.map(({ icon: Icon, title, desc }) => (
             <Card key={title}>
               <div className="p-8">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-transform group-hover:scale-110">
-                  <Icon className="h-6 w-6 text-primary" />
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 transition-transform group-hover:scale-110">
+                  <Icon className="h-6 w-6 text-primary-light" />
                 </div>
                 <h3 className="mb-3 text-lg font-semibold">{title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{desc}</p>
@@ -648,7 +751,7 @@ function Features() {
 
 function Metrics() {
   return (
-    <Section id="metrics" className="border-t border-border/50 py-28 sm:py-36">
+    <Section id="metrics" className="border-t border-white/[0.04] py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
@@ -657,7 +760,7 @@ function Metrics() {
           variants={stagger}
           className="mx-auto max-w-3xl text-center"
         >
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <motion.h2 variants={fadeUp} className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
             Four metrics that define a new category
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
@@ -688,7 +791,7 @@ function Metrics() {
                       animate={{ scale: [1, 1.15, 1] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
                     >
-                      <IconComponent className="h-5 w-5 text-primary" />
+                      <IconComponent className="h-5 w-5 text-primary-light" />
                     </motion.div>
                   </div>
                   <h3 className="text-xl font-bold">{metric.name}</h3>
@@ -704,7 +807,7 @@ function Metrics() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5, duration: 0.5 }}
-                  className="flex items-center gap-2 text-sm text-success"
+                  className="flex items-center gap-2 text-sm text-primary-light"
                 >
                   <Check className="h-4 w-4" />
                   <span className="font-medium">{metric.good}</span>
@@ -724,7 +827,7 @@ function Metrics() {
 
 function Pricing() {
   return (
-    <Section id="pricing" className="border-t border-border/50 py-28 sm:py-36">
+    <Section id="pricing" className="border-t border-white/[0.04] py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <motion.div
           initial="hidden"
@@ -733,7 +836,7 @@ function Pricing() {
           variants={stagger}
           className="mx-auto max-w-3xl text-center"
         >
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <motion.h2 variants={fadeUp} className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
             Simple, transparent pricing
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-6 text-lg text-muted">
@@ -758,8 +861,8 @@ function Pricing() {
               whileHover={{ y: -8 }}
               className={`relative flex flex-col rounded-2xl border p-10 transition-all ${
                 tier.popular
-                  ? "border-primary/50 bg-card shadow-2xl shadow-primary/10"
-                  : "border-border/50 bg-card hover:border-primary/20 hover:shadow-xl"
+                  ? "border-primary/30 bg-card shadow-2xl shadow-primary/[0.05]"
+                  : "border-border/30 bg-card hover:border-primary/15 hover:shadow-xl hover:shadow-primary/[0.02]"
               }`}
             >
               {tier.popular && (
@@ -770,7 +873,7 @@ function Pricing() {
                   transition={{ type: "spring", stiffness: 200, damping: 15 }}
                   className="absolute -top-3 left-1/2 -translate-x-1/2"
                 >
-                  <span className="inline-flex items-center rounded-full bg-primary px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-primary/20">
+                  <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-primary backdrop-blur-sm">
                     Most Popular
                   </span>
                 </motion.div>
@@ -794,7 +897,7 @@ function Pricing() {
                     viewport={{ once: true }}
                     className="flex items-start gap-3 text-sm"
                   >
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary-light" />
                     <span>{f}</span>
                   </motion.li>
                 ))}
@@ -805,8 +908,8 @@ function Pricing() {
                 whileTap={{ scale: 0.97 }}
                 className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-center text-sm font-semibold transition-all ${
                   tier.popular
-                    ? "bg-primary text-white shadow-lg shadow-primary/25 hover:bg-primary-dark"
-                    : "border border-border/60 text-foreground hover:bg-card-hover"
+                    ? "border border-primary bg-gradient-to-b from-primary to-primary-dark text-white shadow-lg shadow-primary/20 hover:shadow-primary/30"
+                    : "border border-border/40 text-foreground hover:border-primary/30 hover:bg-card-hover"
                 }`}
               >
                 {tier.cta}
@@ -853,7 +956,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/15">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
               <span className="text-xs font-bold text-primary">L</span>
             </div>
             <span className="text-sm font-bold">

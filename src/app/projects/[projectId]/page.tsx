@@ -235,7 +235,7 @@ const TABS = [
   'Report',
 ] as const
 
-const CHART_COLORS = ['#059669', '#14b8a6', '#0d9488', '#f59e0b', '#ef4444', '#8b5cf6', '#f97316']
+const CHART_COLORS = ['#6366f1', '#818cf8', '#a5b4fc', '#4f46e5', '#c7d2fe', '#e0e7ff', '#f59e0b']
 
 const chartGrid = { strokeDasharray: '3 3', stroke: 'var(--color-border)' } as const
 const chartAxis = { fill: 'var(--color-muted)', fontSize: 12 }
@@ -251,28 +251,28 @@ const chartTooltip = {
 }
 
 const STAGE_BADGE: Record<string, string> = {
-  awareness: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
-  consideration: 'bg-teal-500/15 text-teal-400 border-teal-500/25',
-  decision: 'bg-green-500/15 text-green-400 border-green-500/25',
+  awareness: 'bg-primary/10 text-primary-light border-primary/20',
+  consideration: 'bg-primary/10 text-primary-light border-primary/20',
+  decision: 'bg-primary/10 text-primary-light border-primary/20',
 }
 
 const STATUS_BADGE: Record<string, string> = {
-  active: 'bg-green-500/15 text-green-400',
-  inactive: 'bg-slate-500/15 text-slate-400',
-  draft: 'bg-yellow-500/15 text-yellow-400',
-  planned: 'bg-emerald-500/15 text-emerald-400',
-  published: 'bg-green-500/15 text-green-400',
+  active: 'bg-primary/10 text-primary-light',
+  inactive: 'bg-border text-muted',
+  draft: 'bg-warning/10 text-warning',
+  planned: 'bg-primary/10 text-primary-light',
+  published: 'bg-primary/10 text-primary-light',
 }
 
 const SOURCE_BADGE: Record<string, string> = {
-  blog: 'bg-emerald-500/15 text-emerald-400',
-  documentation: 'bg-teal-500/15 text-teal-400',
-  news: 'bg-amber-500/15 text-amber-400',
-  social: 'bg-pink-500/15 text-pink-400',
-  review: 'bg-orange-500/15 text-orange-400',
-  educational: 'bg-cyan-500/15 text-cyan-400',
-  official: 'bg-green-500/15 text-green-400',
-  forum: 'bg-indigo-500/15 text-indigo-400',
+  blog: 'bg-primary/10 text-primary-light',
+  documentation: 'bg-primary/10 text-primary-light',
+  news: 'bg-warning/10 text-warning',
+  social: 'bg-primary/10 text-primary-light',
+  review: 'bg-warning/10 text-warning',
+  educational: 'bg-primary/5 text-primary-light',
+  official: 'bg-primary/10 text-primary-light',
+  forum: 'bg-primary/10 text-primary-light',
 }
 
 /* ------------------------------------------------------------------ */
@@ -961,10 +961,10 @@ function ScanHistoryTable({ project }: { project: Project }) {
                         label={scan.status}
                         className={
                           scan.status === 'completed'
-                            ? 'bg-green-500/15 text-green-400 border-green-500/25'
+                            ? 'bg-primary/10 text-primary-light border-primary/20'
                             : scan.status === 'running'
-                            ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25'
-                            : 'bg-slate-500/15 text-slate-400 border-slate-500/25'
+                            ? 'bg-primary/5 text-primary-light border-primary/10'
+                            : 'bg-border text-muted border-border'
                         }
                       />
                     </td>
@@ -1004,8 +1004,8 @@ function RecentResponsesSummary({ responses }: { responses: AIResponse[] }) {
                   className={cn([
                     'inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs',
                     r.targetMentioned
-                      ? 'bg-green-500/10 text-green-400'
-                      : 'bg-slate-500/10 text-slate-400',
+                      ? 'bg-primary/5 text-primary-light'
+                      : 'bg-border text-muted',
                   ])}
                 >
                   {r.targetMentioned ? <CheckCircle className="h-3 w-3" /> : <XCircle className="h-3 w-3" />}
@@ -1223,7 +1223,7 @@ function PromptsTab({
                     <td className="px-4 py-3">
                       <Badge
                         label={prompt.status || 'active'}
-                        className={STATUS_BADGE[prompt.status || 'active'] || 'bg-green-500/15 text-green-400'}
+                        className={STATUS_BADGE[prompt.status || 'active'] || 'bg-primary/10 text-primary-light'}
                       />
                     </td>
                     <td className="px-4 py-3 text-muted">
@@ -1235,8 +1235,8 @@ function PromptsTab({
                           className={cn([
                             'inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium',
                             latestResponse.targetMentioned
-                              ? 'bg-green-500/10 text-green-400'
-                              : 'bg-red-500/10 text-red-400',
+                              ? 'bg-primary/5 text-primary-light'
+                              : 'bg-danger/10 text-danger',
                           ])}
                         >
                           {latestResponse.targetMentioned ? 'Yes' : 'No'}
@@ -1337,9 +1337,9 @@ function AIResponsesTab({ project }: { project: Project }) {
 function AIResponseCard({ response }: { response: AIResponse }) {
   const [expanded, setExpanded] = useState(false)
   const sentimentColors: Record<string, string> = {
-    positive: 'bg-green-500/10 text-green-400 border-green-500/25',
-    neutral: 'bg-slate-500/10 text-slate-400 border-slate-500/25',
-    negative: 'bg-red-500/10 text-red-400 border-red-500/25',
+    positive: 'bg-primary/5 text-primary-light border-primary/10',
+    neutral: 'bg-border text-muted border-border',
+    negative: 'bg-danger/10 text-danger border-danger/25',
   }
 
   return (
@@ -1362,8 +1362,8 @@ function AIResponseCard({ response }: { response: AIResponse }) {
           className={cn([
             'inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium',
             response.targetMentioned
-              ? 'bg-green-500/10 text-green-400'
-              : 'bg-red-500/10 text-red-400',
+              ? 'bg-primary/5 text-primary-light'
+              : 'bg-danger/10 text-danger',
           ])}
         >
           {response.targetMentioned ? (
@@ -1580,10 +1580,10 @@ function CompetitorsTab({ project }: { project: Project }) {
                         label={c.sentiment}
                         className={
                           c.sentiment === 'Positive'
-                            ? 'bg-green-500/10 text-green-400 border-green-500/25'
+                            ? 'bg-primary/5 text-primary-light border-primary/10'
                             : c.sentiment === 'Neutral'
-                            ? 'bg-slate-500/10 text-slate-400 border-slate-500/25'
-                            : 'bg-red-500/10 text-red-400 border-red-500/25'
+                            ? 'bg-border text-muted border-border'
+                            : 'bg-danger/10 text-danger border-danger/25'
                         }
                       />
                     </td>
@@ -1591,7 +1591,7 @@ function CompetitorsTab({ project }: { project: Project }) {
                       <span
                         className={cn([
                           'inline-flex items-center gap-1 text-xs font-medium',
-                          c.trend >= 0 ? 'text-green-400' : 'text-red-400',
+                          c.trend >= 0 ? 'text-primary-light' : 'text-danger',
                         ])}
                       >
                         <TrendingUp
@@ -1902,12 +1902,12 @@ function CitationsTab({ project }: { project: Project }) {
                       {c.isTargetDomain ? (
                         <Badge
                           label="Target"
-                          className="bg-green-500/10 text-green-400 border-green-500/25"
+                          className="bg-primary/5 text-primary-light border-primary/10"
                         />
                       ) : c.isCompetitorDomain ? (
                         <Badge
                           label="Competitor"
-                          className="bg-red-500/10 text-red-400 border-red-500/25"
+                          className="bg-danger/10 text-danger border-danger/25"
                         />
                       ) : (
                         <Badge
@@ -2098,10 +2098,10 @@ function GEOAuditTab({
                       label={f.impact}
                       className={
                         f.impact === 'high'
-                          ? 'bg-red-500/10 text-red-400 border-red-500/25'
+                          ? 'bg-danger/10 text-danger border-danger/25'
                           : f.impact === 'medium'
-                          ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/25'
-                          : 'bg-green-500/10 text-green-400 border-green-500/25'
+                          ? 'bg-warning/10 text-warning border-warning/25'
+                          : 'bg-primary/5 text-primary-light border-primary/10'
                       }
                     />
                   </td>
@@ -2110,10 +2110,10 @@ function GEOAuditTab({
                       label={f.effort}
                       className={
                         f.effort === 'high'
-                          ? 'bg-red-500/10 text-red-400 border-red-500/25'
+                          ? 'bg-danger/10 text-danger border-danger/25'
                           : f.effort === 'medium'
-                          ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/25'
-                          : 'bg-green-500/10 text-green-400 border-green-500/25'
+                          ? 'bg-warning/10 text-warning border-warning/25'
+                          : 'bg-primary/5 text-primary-light border-primary/10'
                       }
                     />
                   </td>
@@ -2241,7 +2241,7 @@ function ContentBriefsTab({
             {brief.status !== 'planned' && (
               <button
                 onClick={() => updateStatus(brief.id, 'planned')}
-                className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-card-hover hover:text-emerald-400"
+                className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-card-hover hover:text-primary-light"
               >
                 <Flag className="h-3 w-3" />
                 Mark Planned
@@ -2250,7 +2250,7 @@ function ContentBriefsTab({
             {brief.status !== 'published' && (
               <button
                 onClick={() => updateStatus(brief.id, 'published')}
-                className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-card-hover hover:text-green-400"
+                className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-card-hover hover:text-primary-light"
               >
                 <CheckCircle className="h-3 w-3" />
                 Mark Published

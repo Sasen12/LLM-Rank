@@ -46,12 +46,12 @@ import { cn } from '@/lib/utils'
 const MODELS = ['ChatGPT', 'Gemini', 'Claude', 'Perplexity', 'Google AI Overviews', 'Copilot']
 
 const MODEL_COLORS: Record<string, string> = {
-  ChatGPT: '#10b981',
-  Gemini: '#f59e0b',
-  Claude: '#0d9488',
-  Perplexity: '#ec4899',
-  'Google AI Overviews': '#14b8a6',
-  Copilot: '#059669',
+  ChatGPT: '#6366f1',
+  Gemini: '#8b5cf6',
+  Claude: '#a78bfa',
+  Perplexity: '#c084fc',
+  'Google AI Overviews': '#818cf8',
+  Copilot: '#4f46e5',
 }
 
 const MODEL_ICONS: Record<string, typeof Brain> = {
@@ -271,11 +271,13 @@ export default function DashboardPage() {
     }
   }
 
+  const barFillColors = ['#6366f1', '#818cf8', '#a5b4fc', '#4f46e5', '#c7d2fe', '#e0e7ff']
+
   const barChartData = [
     {
       name: report?.project?.brandName || 'Your Brand',
       mentions: targetMentionsTotal,
-      fill: '#059669',
+      fill: barFillColors[0],
     },
     ...Object.entries(competitorMentions)
       .sort(([, a], [, b]) => b - a)
@@ -283,7 +285,7 @@ export default function DashboardPage() {
       .map(([name, count], i) => ({
         name,
         mentions: count,
-        fill: ['#0d9488', '#f59e0b', '#ef4444', '#10b981', '#14b8a6'][i],
+        fill: barFillColors[i + 1] || barFillColors[barFillColors.length - 1],
       })),
   ]
 
@@ -316,60 +318,60 @@ export default function DashboardPage() {
   const previousMetrics = report?.scans?.[1]?.metricSnapshots?.[0]
 
   const metricCards = metrics
-    ? [
-        {
-          label: 'AI Visibility Score',
-          value: metrics.visibilityScore,
-          suffix: '',
-          icon: Eye,
-          color: '#059669',
-          bgClass: 'bg-primary/10',
-          textClass: 'text-primary',
-          change: previousMetrics
-            ? getChange(metrics.visibilityScore, previousMetrics.visibilityScore)
-            : null,
-        },
-        {
-          label: 'AI Mention Rate',
-          value: metrics.aiMentionRate,
-          suffix: '%',
-          icon: MessageSquare,
-          color: '#10b981',
-          bgClass: 'bg-success/10',
-          textClass: 'text-success',
-          change: previousMetrics
-            ? getChange(metrics.aiMentionRate, previousMetrics.aiMentionRate)
-            : null,
-        },
-        {
-          label: 'Prompt Coverage',
-          value: metrics.promptCoverage,
-          suffix: '%',
-          icon: Crosshair,
-          color: '#14b8a6',
-          bgClass: 'bg-accent/10',
-          textClass: 'text-accent',
-          change: previousMetrics
-            ? getChange(metrics.promptCoverage, previousMetrics.promptCoverage)
-            : null,
-        },
-        {
-          label: 'Citation Score',
-          value: metrics.citationScore,
-          suffix: '%',
-          icon: Link2,
-          color: '#0d9488',
-          bgClass: 'bg-secondary/10',
-          textClass: 'text-secondary',
-          change: previousMetrics
-            ? getChange(metrics.citationScore, previousMetrics.citationScore)
-            : null,
-        },
-        {
-          label: 'Competitor Dominance',
-          value: metrics.competitorDominance,
-          suffix: '%',
-          icon: TrendingUp,
+      ? [
+          {
+            label: 'AI Visibility Score',
+            value: metrics.visibilityScore,
+            suffix: '',
+            icon: Eye,
+            color: '#6366f1',
+            bgClass: 'bg-primary/10',
+            textClass: 'text-primary',
+            change: previousMetrics
+              ? getChange(metrics.visibilityScore, previousMetrics.visibilityScore)
+              : null,
+          },
+          {
+            label: 'AI Mention Rate',
+            value: metrics.aiMentionRate,
+            suffix: '%',
+            icon: MessageSquare,
+            color: '#818cf8',
+            bgClass: 'bg-primary/10',
+            textClass: 'text-primary-light',
+            change: previousMetrics
+              ? getChange(metrics.aiMentionRate, previousMetrics.aiMentionRate)
+              : null,
+          },
+          {
+            label: 'Prompt Coverage',
+            value: metrics.promptCoverage,
+            suffix: '%',
+            icon: Crosshair,
+            color: '#a5b4fc',
+            bgClass: 'bg-primary/10',
+            textClass: 'text-primary-light',
+            change: previousMetrics
+              ? getChange(metrics.promptCoverage, previousMetrics.promptCoverage)
+              : null,
+          },
+          {
+            label: 'Citation Score',
+            value: metrics.citationScore,
+            suffix: '%',
+            icon: Link2,
+            color: '#4f46e5',
+            bgClass: 'bg-primary/10',
+            textClass: 'text-primary',
+            change: previousMetrics
+              ? getChange(metrics.citationScore, previousMetrics.citationScore)
+              : null,
+          },
+          {
+            label: 'Competitor Dominance',
+            value: metrics.competitorDominance,
+            suffix: '%',
+            icon: TrendingUp,
           color: '#ef4444',
           bgClass: 'bg-danger/10',
           textClass: 'text-danger',
