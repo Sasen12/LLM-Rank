@@ -48,10 +48,10 @@ const MODELS = ['ChatGPT', 'Gemini', 'Claude', 'Perplexity', 'Google AI Overview
 const MODEL_COLORS: Record<string, string> = {
   ChatGPT: '#10b981',
   Gemini: '#f59e0b',
-  Claude: '#6366f1',
+  Claude: '#0d9488',
   Perplexity: '#ec4899',
-  'Google AI Overviews': '#06b6d4',
-  Copilot: '#0ea5e9',
+  'Google AI Overviews': '#14b8a6',
+  Copilot: '#059669',
 }
 
 const MODEL_ICONS: Record<string, typeof Brain> = {
@@ -260,7 +260,7 @@ export default function DashboardPage() {
     {
       name: report?.project?.brandName || 'Your Brand',
       mentions: targetMentionsTotal,
-      fill: '#0ea5e9',
+      fill: '#059669',
     },
     ...Object.entries(competitorMentions)
       .sort(([, a], [, b]) => b - a)
@@ -268,7 +268,7 @@ export default function DashboardPage() {
       .map(([name, count], i) => ({
         name,
         mentions: count,
-        fill: ['#6366f1', '#f59e0b', '#ef4444', '#10b981', '#06b6d4'][i],
+        fill: ['#0d9488', '#f59e0b', '#ef4444', '#10b981', '#14b8a6'][i],
       })),
   ]
 
@@ -307,7 +307,7 @@ export default function DashboardPage() {
           value: metrics.visibilityScore,
           suffix: '',
           icon: Eye,
-          color: '#0ea5e9',
+          color: '#059669',
           bgClass: 'bg-primary/10',
           textClass: 'text-primary',
           change: previousMetrics
@@ -331,7 +331,7 @@ export default function DashboardPage() {
           value: metrics.promptCoverage,
           suffix: '%',
           icon: Crosshair,
-          color: '#06b6d4',
+          color: '#14b8a6',
           bgClass: 'bg-accent/10',
           textClass: 'text-accent',
           change: previousMetrics
@@ -343,7 +343,7 @@ export default function DashboardPage() {
           value: metrics.citationScore,
           suffix: '%',
           icon: Link2,
-          color: '#6366f1',
+          color: '#0d9488',
           bgClass: 'bg-secondary/10',
           textClass: 'text-secondary',
           change: previousMetrics
@@ -943,9 +943,9 @@ function ChartsRow({
                 type="monotone"
                 dataKey="score"
                 name="Visibility Score"
-                stroke="#0ea5e9"
+                stroke="#059669"
                 strokeWidth={2}
-                dot={{ fill: '#0ea5e9', r: 4 }}
+                dot={{ fill: '#059669', r: 4 }}
                 activeDot={{ r: 6 }}
               />
               <Line
@@ -961,9 +961,9 @@ function ChartsRow({
                 type="monotone"
                 dataKey="coverage"
                 name="Prompt Coverage"
-                stroke="#06b6d4"
+                stroke="#14b8a6"
                 strokeWidth={2}
-                dot={{ fill: '#06b6d4', r: 4 }}
+                dot={{ fill: '#14b8a6', r: 4 }}
                 activeDot={{ r: 6 }}
               />
             </LineChart>
@@ -1075,7 +1075,7 @@ function ModelPerformanceGrid({
                 >
                   <IconComponent
                     className="h-5 w-5"
-                    style={{ color: MODEL_COLORS[model.name] || '#0ea5e9' }}
+                    style={{ color: MODEL_COLORS[model.name] || '#059669' }}
                   />
                 </div>
                 <div className="min-w-0 flex-1">

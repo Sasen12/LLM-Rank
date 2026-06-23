@@ -241,11 +241,11 @@ const TABS = [
   'Report',
 ] as const
 
-const CHART_COLORS = ['#0ea5e9', '#6366f1', '#10b981', '#f59e0b', '#ef4444', '#06b6d4', '#8b5cf6']
+const CHART_COLORS = ['#059669', '#14b8a6', '#0d9488', '#f59e0b', '#ef4444', '#8b5cf6', '#f97316']
 
 const STAGE_BADGE: Record<string, string> = {
-  awareness: 'bg-blue-500/15 text-blue-400 border-blue-500/25',
-  consideration: 'bg-purple-500/15 text-purple-400 border-purple-500/25',
+  awareness: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
+  consideration: 'bg-teal-500/15 text-teal-400 border-teal-500/25',
   decision: 'bg-green-500/15 text-green-400 border-green-500/25',
 }
 
@@ -253,18 +253,18 @@ const STATUS_BADGE: Record<string, string> = {
   active: 'bg-green-500/15 text-green-400',
   inactive: 'bg-slate-500/15 text-slate-400',
   draft: 'bg-yellow-500/15 text-yellow-400',
-  planned: 'bg-blue-500/15 text-blue-400',
+  planned: 'bg-emerald-500/15 text-emerald-400',
   published: 'bg-green-500/15 text-green-400',
 }
 
 const SOURCE_BADGE: Record<string, string> = {
-  blog: 'bg-blue-500/15 text-blue-400',
-  documentation: 'bg-purple-500/15 text-purple-400',
+  blog: 'bg-emerald-500/15 text-emerald-400',
+  documentation: 'bg-teal-500/15 text-teal-400',
   news: 'bg-amber-500/15 text-amber-400',
   social: 'bg-pink-500/15 text-pink-400',
   review: 'bg-orange-500/15 text-orange-400',
   educational: 'bg-cyan-500/15 text-cyan-400',
-  official: 'bg-emerald-500/15 text-emerald-400',
+  official: 'bg-green-500/15 text-green-400',
   forum: 'bg-indigo-500/15 text-indigo-400',
 }
 
@@ -955,7 +955,7 @@ function ScanHistoryTable({ project }: { project: Project }) {
                           scan.status === 'completed'
                             ? 'bg-green-500/15 text-green-400 border-green-500/25'
                             : scan.status === 'running'
-                            ? 'bg-blue-500/15 text-blue-400 border-blue-500/25'
+                            ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25'
                             : 'bg-slate-500/15 text-slate-400 border-slate-500/25'
                         }
                       />
@@ -2254,7 +2254,7 @@ function ContentBriefsTab({
             {brief.status !== 'planned' && (
               <button
                 onClick={() => updateStatus(brief.id, 'planned')}
-                className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-card-hover hover:text-blue-400"
+                className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-card-hover hover:text-emerald-400"
               >
                 <Flag className="h-3 w-3" />
                 Mark Planned
